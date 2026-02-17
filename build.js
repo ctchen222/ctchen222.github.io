@@ -27,8 +27,7 @@ function renderNav() {
 }
 
 function renderFooter() {
-  const links = config.footer.map(f => `<a href="${f.url}">${f.label}</a>`).join(' ');
-  return links;
+  return config.footer.map(f => `<a href="${f.url}">${f.label}</a>`).join(' | ');
 }
 
 function renderDisqus() {
@@ -70,6 +69,17 @@ function formatDate(date) {
   return d.toISOString().slice(0, 10);
 }
 
+function getExcerpt(body, maxLen = 200) {
+  const text = body
+    .replace(/^#+\s+.*/gm, '')       // strip markdown headings
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // [text](url) → text
+    .replace(/[*_`~]/g, '')           // strip emphasis markers
+    .replace(/\n+/g, ' ')            // collapse newlines
+    .trim();
+  if (!text) return '';
+  return text.length > maxLen ? text.slice(0, maxLen) + '...' : text;
+}
+
 // --- Load templates ---
 
 const templates = {};
@@ -109,9 +119,15 @@ for (const post of posts) {
 }
 
 // Index page
-const postListHtml = posts.map(p =>
-  `      <li><span class="date">${formatDate(p.date)}</span><a href="/posts/${p.slug}/">${p.title || p.slug}</a></li>`
-).join('\n');
+const postListHtml = posts.map(p => {
+  const excerpt = getExcerpt(p.body);
+  return `    <div class="post-entry">
+      <h2><a href="/posts/${p.slug}/">${p.title || p.slug}</a></h2>
+      <div class="post-meta">${config.author} · ${formatDate(p.date)}</div>
+      ${excerpt ? `<p class="post-excerpt">${excerpt}</p>` : ''}
+      <a class="read-more" href="/posts/${p.slug}/">read more</a>
+    </div>`;
+}).join('\n');
 
 const indexHtml = applyTemplate(templates.index, {
   ...commonVars,
