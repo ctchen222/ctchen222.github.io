@@ -1,0 +1,16 @@
+{
+  "title": "CTCHEN",
+  "siteTitle": "CTChen's Blog",
+  "author": "CTCHEN",
+  "url": "https://www.blog-ctchen.com",
+  "disqus": "",
+  "footer": [
+    { "label": "rss feed", "url": "/feed.xml" },
+    { "label": "github", "url": "https://github.com/ctchen222" }
+  ],
+  "nav": [
+    { "label": "Home", "url": "/" },
+    { "label": "Letter", "url": "/letter/" },
+    { "label": "About", "url": "/about/" }
+  ]
+}
