@@ -5,11 +5,12 @@
   "url": "https://www.blog-ctchen.com",
   "disqus": "",
   "footer": [
-    { "label": "rss feed", "url": "/feed.xml" },
+    { "label": "RSS", "url": "/feed.xml" },
     { "label": "github", "url": "https://github.com/ctchen222" }
   ],
   "nav": [
     { "label": "Home", "url": "/" },
+    { "label": "Blog", "url": "/articles/" },
     { "label": "Letter", "url": "/letter/" },
     { "label": "About", "url": "/about/" }
   ]
