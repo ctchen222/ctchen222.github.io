@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+dist
+.git
+.github
+.claude
+.DS_Store
+*.pdf
+public/interview-deck
