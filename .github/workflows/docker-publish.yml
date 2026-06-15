@@ -1,4 +1,4 @@
-name: Build and Push Image
+name: Build and Deploy
 
 on:
   push:
@@ -42,3 +42,15 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart deployment on the k3s VM
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: sudo k3s kubectl -n blog rollout restart deployment/blog
