@@ -119,7 +119,7 @@ export default function AboutPage() {
             description="A Taiwan pet adoption and lost-pet matching platform. It combines shelter data, lost-pet reports, notifications, and LINE integration into one adoption workflow."
             links={[
               { label: "GitHub repository", href: "https://github.com/ctchen222/FurFriend-Finder" },
-              { label: "Live site", href: "https://www.furfriend-finder.com" },
+              { label: "Live site", href: "https://furfriend-finder.com" },
             ]}
           />
           <ProjectCard
