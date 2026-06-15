@@ -15,8 +15,8 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm build
 
-# ---- Runtime stage: serve out/ with nginx ----
-FROM nginx:1.27-alpine AS runner
-COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/out /usr/share/nginx/html
-EXPOSE 80
+# ---- Runtime stage: serve out/ with Caddy (auto-HTTPS, ~40MB) ----
+FROM caddy:2-alpine AS runner
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=builder /app/out /srv
+EXPOSE 80 443
